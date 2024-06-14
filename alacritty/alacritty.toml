@@ -1,0 +1,16 @@
+# Defines the shell alacritty uses
+# If empty it will use $SHELL instead
+shell = "/bin/fish"
+
+[window]
+# Padding
+padding = { x = 10, y = 10 }
+opacity = 0.8
+blur = true
+dynamic_padding = true
+
+[font]
+# Alternate font to use is "HackNerdFont"
+normal = { family = "CozetteVector", style = "Regular" }
+size = 18
+offset = { x = 1, y = 0 }

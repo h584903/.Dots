@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Capture the output of `todo.sh ls` command
+input=$(todo.sh ls)
+
+# Check if there is any output
+if [ -z "$input" ]; then
+    echo "No TODO items found."
+    exit 1
+fi
+
+# Start the JSON array, process each line, and end the JSON array, all in one line
+echo -n "["; echo "$input" | awk 'NR > 1 {printf ", "} {printf "{\"todo\": \"%s\"}", $0}'; echo "]"
+

@@ -1,0 +1,123 @@
+(defwindow bar
+  :monitor 0
+  :geometry (geometry
+  :x "0%"
+  :y "20px"
+  :width "90%"
+  :height "30px"
+  :anchor "top center"
+              )
+  :stacking "fg"
+  :exclusive true
+  (centerbox
+    :orientation "h"
+    (left)
+    (center)
+    (right)
+    )
+  )
+(defwindow productivity
+  :monitor 0
+  :stacking "bg"
+  :exclusive "false" 
+  :geometry (geometry
+  :anchor "right center"
+  :height "50%"
+  :width "20%"
+              )
+  (todo_list)
+  )
+
+(defwidget left []
+  (box 
+    :orientation "h"
+    :halign "start"
+    (workspaces)
+    )
+  )
+(defwidget center []
+  (box 
+    :orientation "h"
+    :halign "center"
+    (window_w)
+    )
+  )
+(defwidget right []
+  (box 
+    :orientation "h"
+    :halign "end"
+    (battery :battery {EWW_BATTERY.BAT0.capacity} :status {EWW_BATTERY.BAT0.status} :charge "󱐋" :one "" :two "" :three "" :four "" :five "" :six "" :seven "")
+    (clock)
+    )
+  )
+
+(defwidget clock []
+  (box 
+    :orientation "h"
+    :halign "center"
+    :class "clock"
+    time
+    )
+  )
+
+(defwidget battery [battery status one two three four five six seven charge]
+  (box 
+    :orientation "h"
+    :halign "center"
+    :class "battery"
+    (box :class "bat-box ${battery < 25 ? "four" : battery < 50 ? "three" : battery < 75 ? "two" : battery < 100 ? "one" : "zero"}" 
+         :space-evenly false
+         :spacing 8
+      (label :class "${status}" :text { status == 'Charging' ? charge : "󱐌"})
+      (label :text { battery < 15 ? seven :
+        battery < 30 ? six :
+        battery < 45 ? five :
+        battery < 60 ? four :
+        battery < 75 ? three :
+        battery < 95 ? two : one})
+      (box
+        (label :text { battery })
+        (label :text "%")
+      )))
+  )
+
+(deflisten todos :initial "[]" "bash ~/.config/eww/scripts/get-todo")
+
+(defwidget todo_list []
+  (box :class "todo-list"
+       :orientation "v"
+       :space-evenly false
+    (for example in todos
+      (label :text "${example.todo}")
+      )
+    )
+  )
+
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
+(defwidget workspaces []
+  (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces-widget"
+    (box :space-evenly true
+      (label :text "${workspaces}${current_workspace}" :visible false)
+      (for workspace in workspaces
+        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+          (box :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+            (label :text "${workspace.id}")
+            )
+          )
+        )
+      )
+    )
+  )
+
+(deflisten window :initial "..." "sh ~/.config/eww/scripts/get-window-title")
+(defwidget window_w []
+  (box :class "window_w"
+    (label :text "${window}"
+      )
+    )
+  )
+
+
+(defpoll time :interval "10s"
+  "date '+%H:%M'")

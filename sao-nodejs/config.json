@@ -1,0 +1,12 @@
+{
+	"generators": {
+		"1fc4a446": {
+			"type": "local",
+			"path": "/home/tesdap/.npm/_npx/6cfe635d3aa1a47c/node_modules/create-nuxt-app/lib",
+			"hash": "1fc4a446"
+		}
+	},
+	"answers": {
+		"1fc4a446__npm__": {}
+	}
+}

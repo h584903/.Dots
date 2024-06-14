@@ -1,0 +1,82 @@
+* {
+	all:unset;
+	font-family: "CozetteVector";
+}
+.workspace-entry {
+	background-color: #1b1b1b;
+	font-size: 30px;
+	margin: 0 3 0 2;
+}
+.occupied {
+	color: #1b1b1b;
+	background-color: #d4be98;
+}
+.empty {
+	color: #7c6f64;
+}
+.current {
+	background-color: #e78a4b;
+	color: #1b1b1b;
+}
+.clock {
+	font-size: 20px;
+	color: #d4be98;
+	background-color: #1b1b1b;
+	font-size: 25px;
+	border-radius: 25px;
+	padding: 10px;
+	margin: 0 3 0 2;
+}
+.window_w {
+	font-size: 20px;
+	color: #d4be98;
+	background-color: #1b1b1b;
+	font-size: 25px;
+	border-radius: 25px;
+	padding: 10px;
+	margin: 0 3 0 2;
+}
+.window_w * {
+	font-size: 20px;
+}
+.battery {
+	font-size: 25px;
+	background-color: #1b1b1b;
+	font-size: 25px;
+	border-radius: 25px;
+	padding: 10px;
+	margin: 0 3 0 2;
+}
+.zero {
+	color: #d3869b;
+}
+.one {
+	color: #a9b665;
+}
+.two {
+	color: #7daea3;
+}
+.three {
+	color: #d8a657;
+}
+.four {
+	color: #ea6962;
+}
+
+.todo-list {
+	font-size: 20px;
+	background-color: #1b1b1b;
+	color: #d4be98;
+	border-radius: 25px;
+	padding: 10px;
+	margin: 0 3 0 2;
+}
+.todo-iten {
+	background-color: #d4be98;
+	color: #1b1b1b;
+	border-radius: 25px;
+	margin: 0 3 0 2;
+}
+.Discharging {
+	color: #1b1b1b;
+}
